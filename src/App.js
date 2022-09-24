@@ -1,9 +1,21 @@
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Login from './pages/Login/Login'
+import * as ROUTES from './constants/Routes'
 
-function App() {
+const Login = lazy(() => import ('./pages/Login/Login'));
+const Register = lazy(() => import ('./pages/Register/Register'))
+
+const App = () => {
   return (
-    <Login/>
+    <BrowserRouter>
+      <Suspense fallback={<p>Loading ...</p>}>
+        <Routes>
+          <Route path={ROUTES.LOGIN} element={<Login/>}/>
+          <Route path={ROUTES.REGISTER} element={<Register/>}/>
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 }
 
