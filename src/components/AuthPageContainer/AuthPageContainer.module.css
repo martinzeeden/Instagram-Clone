@@ -1,0 +1,33 @@
+.container {
+    background: #10111b;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputContainerWrapper {
+    width: 90%;
+    max-width: 300px;
+    color: rgb(221, 229, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headline {
+    margin-bottom: 20px;
+}
+
+.inputContainer {
+    background-color: #17192e;
+    box-sizing: border-box;
+    padding: 32px;
+    border-radius: 8px;
+    color: rgb(221, 229, 255);
+    width: 100%;
+}
+
+.inputContainer > * + * {
+    margin-top: 16px;
+}
