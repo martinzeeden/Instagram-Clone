@@ -9,7 +9,8 @@ import { useContext } from 'react';
 import FirebaseContext from '../../context/firebase';
 import { useEffect } from 'react';
 import TextWithLink from '../../components/TextWithLink/TextWithLink';
-import { REGISTER } from '../../constants/Routes';
+import { DASHBOARD, REGISTER } from '../../constants/Routes';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,8 +22,15 @@ const Login = () => {
 
   const isInvalid = password === '' || email === '';
 
-  const handleLogin = () => {
-    alert('Login');
+  const handleLogin = async () => {
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      navigate(DASHBOARD);
+    } catch (error) {
+      setEmail('');
+      setPassword('');
+      setError(error.message);
+    }
   };
 
   useEffect(() => {
@@ -36,13 +44,13 @@ const Login = () => {
         <Input value={email} onChange={(e) => setEmail(e.target.value)} />
       </FormGroup>
       <FormGroup label="Password">
-        <Input value={password} onChange={(e) => setPassword(e.target.value)} />
+        <Input
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+        />
       </FormGroup>
-      {/* {error && (
-        <FormGroup>
-          <ErrorMessage message={error} />
-        </FormGroup>
-      )} */}
+      {error && <ErrorMessage message={error} />}
       <Button
         className={styles.button}
         label="Log in"
