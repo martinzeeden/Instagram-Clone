@@ -8,7 +8,7 @@
 
 .inputContainerWrapper {
     width: 90%;
-    max-width: 300px;
+    max-width: 400px;
     color: rgb(221, 229, 255);
     display: flex;
     flex-direction: column;

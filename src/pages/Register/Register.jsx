@@ -7,6 +7,7 @@ import FormGroup from '../../components/FormGroup/FormGroup';
 import Input from '../../components/Input/Input';
 import TextWithLink from '../../components/TextWithLink/TextWithLink';
 import { LOGIN } from '../../constants/Routes';
+import styles from './Register.module.css'
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -35,15 +36,17 @@ const Register = () => {
       <FormGroup label="Username">
         <Input value={username} onChange={(e) => setUsername(e.target.value)} />
       </FormGroup>
-      <FormGroup label="First Name">
-        <Input
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-      </FormGroup>
-      <FormGroup label={'Last Name'}>
-        <Input value={lastName} onChange={(e) => setLastName(e.target.value)} />
-      </FormGroup>
+      <div className={styles.flexContainer}>
+        <FormGroup label="First Name">
+          <Input
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup label={'Last Name'}>
+          <Input value={lastName} onChange={(e) => setLastName(e.target.value)} />
+        </FormGroup>
+      </div>
       <FormGroup label="E-Mail">
         <Input value={email} onChange={(e) => setEmail(e.target.value)} />
       </FormGroup>
