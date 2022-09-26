@@ -1,5 +1,5 @@
 .container {
-    background: #10111b;
+    background: var(--clr-background);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -9,7 +9,7 @@
 .inputContainerWrapper {
     width: 90%;
     max-width: 400px;
-    color: rgb(221, 229, 255);
+    color: var(--clr-text-white);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,11 +20,11 @@
 }
 
 .inputContainer {
-    background-color: #17192e;
+    background-color: var(--clr-card-background);
     box-sizing: border-box;
     padding: 32px;
     border-radius: 8px;
-    color: rgb(221, 229, 255);
+    color: var(--clr-text-white);
     width: 100%;
 }
 
