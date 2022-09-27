@@ -1,0 +1,19 @@
+.iconButton {
+  height: 32px;
+  width: 32px;
+  border: none;
+  border-radius: 16px;
+  background-color: var(--clr-card-background);
+  box-sizing: border-box;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.iconButton:hover {
+  background-color: var(--clr-primary);
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,11 @@
+.header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  color: var(--clr-text-white);
+  justify-content: space-between;
+}
+
+.buttonBox > * + * {
+  margin-left: 12px;
+}
