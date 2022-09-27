@@ -1,0 +1,116 @@
+.container {
+  background-color: var(--clr-card-background);
+  border-radius: 8px;
+  /* background-color: hsla(0, 100%, 100%, 0.16);	 */
+	box-shadow:
+		/* offset-x | offset-y | blur-radius | spread-radius | color */
+		0px 24px 38px 3px hsla(0,0%,0%,0.14), 
+		0px 9px 46px 8px hsla(0,0%,0%,0.12), 
+		0px 11px 15px -7px hsla(0,0%,0%,0.2);
+}
+
+.container + .container {
+  margin-top: 32px;
+}
+
+.accountContainer {
+  display: flex;
+  padding: 12px 16px;
+  align-items: center;
+}
+
+.accountContainer > img {
+  height: 32px;
+  width: 32px;
+  border-radius: 16px;
+}
+
+.accountContainer > p {
+  color: var(--clr-text-white);
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 12px;
+}
+
+.image {
+  width: 100%;
+}
+
+.likesContainer {
+  display: flex;
+  margin-left: 12px;
+  margin-top: 8px;
+}
+
+.likes {
+  color: var(--clr-text-grey);
+  font-style: italic;
+}
+
+.likes + .likes {
+  margin-left: 8px;
+}
+
+.likes > b {
+  margin-right: 4px;
+  color: var(--clr-text-white);
+}
+
+.commentContainer {
+  margin-left: 12px;
+  margin-top: 8px;
+}
+
+.actionContainer {
+  margin-top: 8px;
+  margin-left: 12px;
+}
+
+.actionContainer > img {
+  height: 28px;
+}
+
+.actionContainer > img + img {
+  margin-left: 12px;
+}
+
+.viewAllComments,
+.uploadTime {
+  font-size: 13px;
+  color: var(--clr-text-grey);
+  margin-top: 8px;
+  margin-left: 12px;
+}
+
+.uploadTime {
+  margin-top: 16px;
+}
+
+.addCommentContainer {
+  margin-top: 16px;
+  border-top: 1px solid var(--clr-text-grey);
+  display: flex;
+}
+
+.addCommentContainer > input {
+  background-color: transparent;
+  height: 48px;
+  padding: 0 12px;
+  color: var(--clr-text-white);
+  flex: 1;
+  border: none;
+  outline: none;
+}
+
+.addCommentContainer > input::placeholder{
+  color: var(--clr-text-grey)
+}
+
+.addCommentContainer > button {
+  padding: 0 16px;
+  color: var(--clr-primary);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
