@@ -1,0 +1,13 @@
+.comment {
+  color: var(--clr-text-grey);
+  font-size: 15px;
+}
+
+.comment + .comment {
+  margin-top: 8px;
+}
+
+.comment > b {
+  margin-right: 4px;
+  color: var(--clr-text-white)
+}
