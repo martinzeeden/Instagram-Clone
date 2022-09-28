@@ -7,13 +7,15 @@ import IconSettings from '../../assets/icons/settings.svg';
 import IconButton from '../IconButton/IconButton';
 
 const DashboardHeader = () => (
-  <header className={styles.header}>
-    <h1>Instagram</h1>
-    <div className={styles.buttonBox}>
-      <IconButton icon={IconAdd}/>
-      <IconButton icon={IconHome}/>
-      <IconButton icon={IconSettings}/>
-      <IconButton icon={IconLogout} />
+  <header className={styles.headerContainer}>
+    <div className={styles.header}>
+      <h1>Instagram</h1>
+      <div className={styles.buttonBox}>
+        <IconButton icon={IconAdd}/>
+        <IconButton icon={IconHome}/>
+        <IconButton icon={IconSettings}/>
+        <IconButton icon={IconLogout} />
+      </div>
     </div>
   </header>
 );
