@@ -4,7 +4,7 @@ import styles from './Profile.module.css';
 import ProfileImg from './1.JPG'
 import HeartIcon from '../../assets/icons/heart.svg';
 import ChatIcon from '../../assets/icons/chat.svg';
-import Dialog from '../../components/Dialog/Dialog';
+import ImageDialog from '../../components/ImageDialog/ImageDialog';
 
 const Profile = () => (
   <ContentContainer>
@@ -25,6 +25,7 @@ const Profile = () => (
     </div>
     <div className={styles.line}/>
     <div className={styles.grid}>
+      
       {[1,2,3,4,5].map(x => (
         <div className={styles.imageOverlayContainer}>
           <div className={styles.imageOverlay}>
@@ -41,6 +42,7 @@ const Profile = () => (
         </div>
       ))}
     </div>
+    <ImageDialog/>
   </ContentContainer>
 )
 
