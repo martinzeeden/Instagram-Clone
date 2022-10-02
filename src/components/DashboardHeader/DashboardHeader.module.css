@@ -17,6 +17,26 @@
   margin: auto;
 }
 
+.buttonBox {
+  display: flex;
+  align-items: center;
+}
+
 .buttonBox > * + * {
   margin-left: 12px;
+}
+
+.avatar {
+  height: 32px;
+  width: 32px;
+  border: none;
+  border-radius: 16px;
+  background: transparent;
+}
+
+.avatar > img {
+  height: 32px;
+  width: 32px;
+  border: none;
+  border-radius: 16px;
 }
