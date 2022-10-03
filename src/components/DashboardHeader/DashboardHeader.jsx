@@ -3,7 +3,6 @@ import styles from './DashboardHeader.module.css';
 import IconAdd from '../../assets/icons/add.svg';
 import IconHome from '../../assets/icons/home.svg';
 import IconLogout from '../../assets/icons/logout.svg';
-import IconSettings from '../../assets/icons/settings.svg';
 import IconButton from '../IconButton/IconButton';
 import { useContext } from 'react';
 import FirebaseContext from '../../context/firebase';
@@ -16,8 +15,6 @@ const DashboardHeader = () => {
   const { firebase } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-
-  console.log(user)
 
   return (
     <header className={styles.headerContainer}>
