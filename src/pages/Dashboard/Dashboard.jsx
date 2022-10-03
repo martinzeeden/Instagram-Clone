@@ -1,10 +1,15 @@
 import React from 'react';
+import { useEffect } from 'react';
 import Content from '../../components/Content/Content';
 import ContentContainer from '../../components/ContentContainer/ContentContainer';
-import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
 import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
+
+  useEffect(() => {
+    document.title = 'Instagram'
+  }, [])
+
   return (
     <ContentContainer>
       <Content/>
