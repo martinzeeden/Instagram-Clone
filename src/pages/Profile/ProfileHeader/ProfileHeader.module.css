@@ -1,0 +1,42 @@
+.topContainer {
+  display: flex;
+  align-items: center;
+}
+
+.profileImage {
+  height: 128px;
+  width: 128px;
+  border-radius: 64px;
+}
+
+.nameContainer {
+  display: flex;
+  flex-direction: column;
+  height: min-content;
+  margin-left: 48px;
+}
+
+.usernameContainer {
+  display: flex;
+  color: var(--clr-text-white);
+  align-items: center;
+}
+
+.username {
+  font-size: 20px;
+}
+
+.profileStatsContainer {
+  color: var(--clr-text-white);
+  display: flex;
+  margin-top: 24px;
+}
+
+.profileStatsContainer > p + p {
+  margin-left: 12px;
+}
+
+.description {
+  margin-top: 24px;
+  color: var(--clr-text-white)
+}
