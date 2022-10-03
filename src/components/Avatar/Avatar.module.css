@@ -1,0 +1,14 @@
+.avatar {
+  height: 32px;
+  width: 32px;
+  border: none;
+  border-radius: 16px;
+  background: transparent;
+}
+
+.avatar > img {
+  height: 32px;
+  width: 32px;
+  border: none;
+  border-radius: 16px;
+}

@@ -10,24 +10,24 @@ import FirebaseContext from '../../context/firebase';
 import UserContext from '../../context/user';
 import { useNavigate } from 'react-router-dom';
 import { DASHBOARD } from '../../constants/Routes';
+import Avatar from '../Avatar/Avatar';
 
 const DashboardHeader = () => {
   const { firebase } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
+  console.log(user)
+
   return (
     <header className={styles.headerContainer}>
       <div className={styles.header}>
         <h1>Instagram</h1>
         <div className={styles.buttonBox}>
-          {/* <IconButton icon={IconAdd}/> */}
+          <IconButton icon={IconAdd}/>
           <IconButton icon={IconHome} onClick={() => navigate(DASHBOARD)}/>
-          <IconButton icon={IconSettings}/>
           <IconButton icon={IconLogout} onClick={() => firebase.auth().signOut()}/>
-          <button className={styles.avatar} onClick={() => navigate(`profile/${user.displayName}`)}>
-            <img src={`images/avatars/${"martin"}.jpg`}alt=""/>
-          </button>
+          <Avatar user={user}/>
         </div>
       </div>
     </header>
