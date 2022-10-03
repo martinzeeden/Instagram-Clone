@@ -2,48 +2,72 @@ import React from 'react';
 import ContentContainer from '../../components/ContentContainer/ContentContainer';
 import styles from './Profile.module.css';
 import ProfileImg from './1.JPG'
-import HeartIcon from '../../assets/icons/heart.svg';
-import ChatIcon from '../../assets/icons/chat.svg';
 import ImageDialog from '../../components/ImageDialog/ImageDialog';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import { getImagesOfUserByUserId, getUserDataByUsername } from '../../services/firebase';
+import { useState } from 'react';
+import UserContext from '../../context/user';
+import ProfilePictures from './ProfilePictures/ProfilePictures';
+import ProfileHeader from './ProfileHeader/ProfileHeader';
 
-const Profile = () => (
-  <ContentContainer>
-    <div className={styles.topContainer}>
-      <img src={ProfileImg} className={styles.profileImage}/>
-      <div className={styles.nameContainer}>
-        <div className={styles.usernameContainer}>
-          <h3 className={styles.username}>Username</h3>
-          <button className={styles.followButton}>Follow</button>
-        </div>
-        <div className={styles.profileStatsContainer}>
-          <p><b>0</b> Pictures</p>
-          <p><b>0</b> Follower</p>
-          <p><b>0</b> Following</p>
-        </div>
-        <p className={styles.description}>This is a description</p>
-      </div>
-    </div>
-    <div className={styles.line}/>
-    <div className={styles.grid}>
-      
-      {[1,2,3,4,5].map(x => (
-        <div className={styles.imageOverlayContainer}>
-          <div className={styles.imageOverlay}>
-            <div className={styles.imageOverlayItem}>
-              <img src={HeartIcon}/>
-              <p>24</p>
-            </div>
-            <div className={styles.imageOverlayItem}>
-              <img src={ChatIcon}/>
-              <p>123</p>
-            </div>
-          </div>
-          <img src={ProfileImg} className={styles.image}/>
-        </div>
-      ))}
-    </div>
-    <ImageDialog/>
-  </ContentContainer>
-)
+const Profile = () => {
+  const params = useParams();
+  const { username } = params; 
+  const { currentUser } = useContext(UserContext);
+  const [userData, setUserData] = useState(null);
+  const [currentUserData, setCurrentUserData] = useState(null);
+
+  const disableFollowing = username === currentUser.displayName;
+  const canUnfollow = (currentUser && userData) ? userData?.followers.includes(currentUserData?.userId) : false;
+
+  console.log('disableFollowing', disableFollowing);
+  console.log('canUnfollow', canUnfollow)
+
+  console.log(currentUserData)
+
+  const [pictures, setPictures] = useState([]);
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([])
+
+  useEffect(() => {
+    document.title = `${username} - Instagram`
+
+    const loadProfileData = async () => {
+      const userData = await getUserDataByUsername(username);
+      setUserData(userData)
+      setFollowers(userData.followers);
+      setFollowing(userData.following);
+
+      const images = await getImagesOfUserByUserId(userData.userId);
+      setPictures(images);
+    }
+
+    const loadCurrentUserData = async () => {
+      const userData = await getUserDataByUsername(currentUser.displayName);
+      setCurrentUserData(userData);
+    }
+
+    loadProfileData();
+    loadCurrentUserData();
+  }, []);
+  
+  return ( 
+    <ContentContainer>
+      <ProfileHeader 
+        username={username} 
+        profileImage={ProfileImg}
+        disableFollowing={disableFollowing}
+        canUnfollow={canUnfollow}
+        picturesNumber={pictures.length}
+        followersNumber={followers.length}
+        followingNumber={following.length} />
+      <div className={styles.line}/>
+      <ProfilePictures pictures={pictures}/>
+      {/* <ImageDialog/> */}
+    </ContentContainer>
+  );
+}
 
 export default Profile;
