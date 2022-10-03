@@ -67,6 +67,7 @@ const Register = () => {
           fullName: firstName + ' ' + lastName,
           emailAddress: email.toLowerCase(),
           following: [],
+          followers: [],
           dateCreated: Date.now(),
         });
 
