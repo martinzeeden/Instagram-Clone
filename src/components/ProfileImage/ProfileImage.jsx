@@ -3,8 +3,8 @@ import styles from './ProfileImage.module.css';
 import HeartIcon from '../../assets/icons/heart.svg';
 import ChatIcon from '../../assets/icons/chat.svg';
 
-const ProfileImage = ({ image, likes, comments }) => (
-  <div className={styles.imageOverlayContainer}>
+const ProfileImage = ({ image, likes, comments, onClick }) => (
+  <div className={styles.imageOverlayContainer} onClick={onClick}>
     <div className={styles.imageOverlay}>
       <div className={styles.imageOverlayItem}>
         <img src={HeartIcon} alt="Like Icon"/>

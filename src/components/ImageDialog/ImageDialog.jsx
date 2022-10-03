@@ -5,8 +5,8 @@ import styles from './ImageDialog.module.css';
 import HeartIcon from '../../assets/icons/heart.svg';
 import ProfileImg from '../Content/1.JPG';
 
-const ImageDialog = () => (
-  <Dialog>
+const ImageDialog = ({ onClose }) => (
+  <Dialog onClose={onClose}>
       <div className={styles.imageDialog}>
         <img src={ProfileImg} alt="" />
         <div className={styles.imageDialogContent}>
