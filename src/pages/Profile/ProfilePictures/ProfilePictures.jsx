@@ -3,8 +3,9 @@ import ImageDialog from '../../../components/ImageDialog/ImageDialog';
 import ProfileImage from '../../../components/ProfileImage/ProfileImage';
 import styles from './ProfilePictures.module.css';
 
-const ProfilePictures = ({ pictures }) => {
+const ProfilePictures = ({ pictures, username }) => {
   const [openImage, setOpenImage] = useState(null);
+
   return (
     <>
       <div className={styles.grid}>
@@ -16,7 +17,7 @@ const ProfilePictures = ({ pictures }) => {
             comments={image.comments.length}/>
         ))}
       </div>
-      {openImage && <ImageDialog onClose={() => setOpenImage(null)}/>}
+      {openImage && <ImageDialog username={username} image={openImage} onClose={() => setOpenImage(null)}/>}
     </>
   )
 }

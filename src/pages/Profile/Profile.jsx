@@ -29,7 +29,9 @@ const Profile = () => {
 
   const [pictures, setPictures] = useState([]);
   const [followers, setFollowers] = useState([]);
-  const [following, setFollowing] = useState([])
+  const [following, setFollowing] = useState([]);
+
+
 
   useEffect(() => {
     document.title = `${username} - Instagram`
@@ -64,8 +66,7 @@ const Profile = () => {
         followersNumber={followers.length}
         followingNumber={following.length} />
       <div className={styles.line}/>
-      <ProfilePictures pictures={pictures}/>
-      {/* <ImageDialog/> */}
+      <ProfilePictures pictures={pictures} username={username}/>
     </ContentContainer>
   );
 }
