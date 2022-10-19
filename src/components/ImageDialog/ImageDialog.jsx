@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Comment from '../Comment/Comment';
 import Dialog from '../Dialog/Dialog';
 import styles from './ImageDialog.module.css';
 import HeartIcon from '../../assets/icons/heart.svg';
+import HeartRedIcon from '../../assets/icons/heart-red.svg'
 import ProfileImg from '../Content/1.JPG';
 import { formatDate } from '../../helpers/format';
+import { getPhotoByDocId, likePhoto, unlikePhoto } from '../../services/firebase';
+import UserContext from '../../context/user';
 
 const ImageDialog = ({ onClose, image, username }) => {
+  const { currentUser } = useContext(UserContext);
+  const [currentImage, setCurrentImage] = useState(image);
+  const userLikedPhoto = currentImage.likes.includes(currentUser.displayName);
+
+  const likeImage = async () => {   
+    if(userLikedPhoto){
+      await unlikePhoto(currentImage.docId, currentUser.displayName)
+    } else {
+      await likePhoto(currentImage.docId, currentUser.displayName)
+    }
+
+    const updatedImage = await getPhotoByDocId(image.docId)
+    setCurrentImage(updatedImage)
+  }
+
   return (
     <Dialog onClose={onClose}>
       <div className={styles.imageDialog}>
-        <img src={image.imageSrc} alt="" />
+        <img src={currentImage.imageSrc} alt="" />
         <div className={styles.imageDialogContent}>
           <div>
             <div className={styles.dialogContentAccountContainer}>
@@ -18,16 +36,16 @@ const ImageDialog = ({ onClose, image, username }) => {
               <p className={styles.dialogUsername}>{username}</p>
               <p className={styles.dialogContentAccountContainerButton}>Follow</p>
             </div>
-            <p className={styles.dialogDescription}>{image.caption}</p>
+            <p className={styles.dialogDescription}>{currentImage.caption}</p>
             <div className={styles.dialogCommentContainer}>
-              {image.comments.map((comment) => <Comment username={comment.displayName} comment={comment.comment}/>)}
+              {currentImage.comments.map((comment) => <Comment username={comment.displayName} comment={comment.comment}/>)}
             </div>
           </div>
           <div>
             <p className={styles.uploadTime}>{formatDate(image.dateCreated)}</p>  
             <div className={styles.dialogLikeContainer}>
-              <img src={HeartIcon} alt="" />
-              <p><b>{image.likes.length}</b> Likes</p>
+              <img src={userLikedPhoto ? HeartRedIcon : HeartIcon} alt="" onClick={() => likeImage()}/>
+              <p><b>{currentImage.likes.length}</b> Likes</p>
             </div>
             <div className={styles.addCommentContainer}>
               <input placeholder='Add a comment'/>

@@ -97,6 +97,7 @@
 .dialogLikeContainer > img {
   height: 24px;
   width: 24px;
+  cursor: pointer;
 }
 
 .dialogLikeContainer > p {

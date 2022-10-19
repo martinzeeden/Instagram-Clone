@@ -12,6 +12,39 @@ export async function doesUsernameExist(username) {
   return result.docs.length > 0;
 }
 
+export async function likePhoto(docId, activeUser) {
+  await firebase
+    .firestore()
+    .collection('photos')
+    .doc(docId)
+    .update({
+      likes: FieldValue.arrayUnion(activeUser)
+    })
+}
+
+export async function getPhotoByDocId(docId){
+  const result = await firebase
+    .firestore()
+    .collection('photos')
+    .doc(docId)
+    .get();
+
+    return {
+      ...result.data(),
+      docId
+    };
+}
+
+export async function unlikePhoto(docId, activeUser) {
+   await firebase
+    .firestore()
+    .collection('photos')
+    .doc(docId)
+    .update({
+      likes: FieldValue.arrayRemove(activeUser)
+    })
+}
+
 export async function doesEmailAddressExist(emailAddress) {
   const result = await firebase
     .firestore()
@@ -40,6 +73,9 @@ export async function getImagesOfUserByUserId(userId) {
     .where('userId', '==', userId)
     .get();
   
-  return result.docs.map(doc => doc.data());
+  return result.docs.map(doc => ({
+    ...doc.data(),
+    docId: doc.id
+  }));
 }
 
