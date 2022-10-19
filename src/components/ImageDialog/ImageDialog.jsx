@@ -6,13 +6,15 @@ import HeartIcon from '../../assets/icons/heart.svg';
 import HeartRedIcon from '../../assets/icons/heart-red.svg'
 import ProfileImg from '../Content/1.JPG';
 import { formatDate } from '../../helpers/format';
-import { getPhotoByDocId, likePhoto, unlikePhoto } from '../../services/firebase';
+import { getPhotoByDocId, likePhoto, unlikePhoto, comment } from '../../services/firebase';
 import UserContext from '../../context/user';
+import { useRef } from 'react';
 
 const ImageDialog = ({ onClose, image, username }) => {
   const { currentUser } = useContext(UserContext);
   const [currentImage, setCurrentImage] = useState(image);
   const userLikedPhoto = currentImage.likes.includes(currentUser.displayName);
+  const commentRef = useRef();
 
   const likeImage = async () => {   
     if(userLikedPhoto){
@@ -21,8 +23,18 @@ const ImageDialog = ({ onClose, image, username }) => {
       await likePhoto(currentImage.docId, currentUser.displayName)
     }
 
+    await updatePhotoData();
+  }
+
+  const updatePhotoData = async () => {
     const updatedImage = await getPhotoByDocId(image.docId)
     setCurrentImage(updatedImage)
+  }
+
+  const post = async () => {
+    await comment(currentImage.docId, commentRef.current.value, currentUser.displayName);
+    await updatePhotoData();
+    commentRef.current.value = '';
   }
 
   return (
@@ -48,8 +60,8 @@ const ImageDialog = ({ onClose, image, username }) => {
               <p><b>{currentImage.likes.length}</b> Likes</p>
             </div>
             <div className={styles.addCommentContainer}>
-              <input placeholder='Add a comment'/>
-              <button>Post</button>
+              <input placeholder='Add a comment' ref={commentRef}/>
+              <button onClick={post}>Post</button>
             </div>
           </div>
         </div>

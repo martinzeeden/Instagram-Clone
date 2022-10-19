@@ -12,6 +12,16 @@ export async function doesUsernameExist(username) {
   return result.docs.length > 0;
 }
 
+export async function comment(docId, comment, activeUser) {
+  await firebase
+    .firestore()
+    .collection('photos')
+    .doc(docId)
+    .update({
+      comments: FieldValue.arrayUnion({ comment: comment, displayName: activeUser })
+    })
+}
+
 export async function likePhoto(docId, activeUser) {
   await firebase
     .firestore()
