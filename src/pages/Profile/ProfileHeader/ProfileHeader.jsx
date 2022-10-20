@@ -3,7 +3,7 @@ import FollowButton from '../../../components/FollowButton/FollowButton';
 import styles from './ProfileHeader.module.css';
 
 const ProfileHeader = ({
-  profileImage, username, disableFollowing, canUnfollow, picturesNumber, followersNumber, followingNumber, description
+  profileImage, username, disableFollowing, canUnfollow, picturesNumber, followersNumber, followingNumber, description, followOrUnfollowProfile
 }) => {
   return (
     <div className={styles.topContainer}>
@@ -11,7 +11,7 @@ const ProfileHeader = ({
       <div className={styles.nameContainer}>
         <div className={styles.usernameContainer}>
           <h3 className={styles.username}>{username}</h3>
-          {!disableFollowing && (<FollowButton canUnfollow={canUnfollow}/>)}
+          {!disableFollowing && (<FollowButton onClick={followOrUnfollowProfile} canUnfollow={canUnfollow}/>)}
         </div>
         <div className={styles.profileStatsContainer}>
           <p><b>{picturesNumber}</b> Pictures</p>

@@ -22,6 +22,54 @@ export async function comment(docId, comment, activeUser) {
     })
 }
 
+export async function follow(userIdToFollow, activeUserId){
+  console.log('userIdToFollow', userIdToFollow);
+  console.log('activeUserId', activeUserId)
+  const userToFollow = await getUserDataByUserId(userIdToFollow);
+  const activeUser = await getUserDataByUserId(activeUserId);
+
+  const docIdUserToFollow = userToFollow.docId;
+  const docIdActiveUser = activeUser.docId;
+
+  await firebase.firestore()
+    .collection('users')
+    .doc(docIdUserToFollow)
+    .update({
+      followers: FieldValue.arrayUnion(activeUserId)
+    })
+
+  await firebase.firestore()
+    .collection('users')
+    .doc(docIdActiveUser)
+    .update({
+      following: FieldValue.arrayUnion(userIdToFollow)
+    })
+}
+
+export async function unfollow(userIdToUnfollow, activeUserId){
+  console.log('userIdToFollow', userIdToUnfollow);
+  console.log('activeUserId', activeUserId)
+  const userToUnfollow = await getUserDataByUserId(userIdToUnfollow);
+  const activeUser = await getUserDataByUserId(activeUserId);
+
+  const docIdUserToUnfollow = userToUnfollow.docId;
+  const docIdActiveUser = activeUser.docId;
+
+  await firebase.firestore()
+    .collection('users')
+    .doc(docIdUserToUnfollow)
+    .update({
+      followers: FieldValue.arrayRemove(activeUserId)
+    })
+
+  await firebase.firestore()
+    .collection('users')
+    .doc(docIdActiveUser)
+    .update({
+      following: FieldValue.arrayRemove(userIdToUnfollow)
+    })
+}
+
 export async function likePhoto(docId, activeUser) {
   await firebase
     .firestore()
@@ -72,7 +120,24 @@ export async function getUserDataByUsername(username) {
     .where('username', '==', username)
     .get();
     
-    const userDataArray =  result.docs.map(doc => doc.data());
+    const userDataArray =  result.docs.map(doc => ({
+      ...doc.data(),
+      docId: doc.id
+    }));
+    return userDataArray[0];
+}
+
+export async function getUserDataByUserId(userId) {
+  const result = await firebase
+    .firestore()
+    .collection('users')
+    .where('userId', '==', userId)
+    .get();
+
+    const userDataArray =  result.docs.map(doc => ({
+      ...doc.data(),
+      docId: doc.id
+    }));
     return userDataArray[0];
 }
 

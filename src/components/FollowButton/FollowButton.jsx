@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './FollowButton.module.css'
 
-const FollowButton = ({ canUnfollow }) => {
+const FollowButton = ({ canUnfollow, onClick }) => {
   return (
-    <button className={canUnfollow ? styles.unfollow : styles.follow}>{canUnfollow ? 'Unfollow' : 'Follow'}</button>
+    <button onClick={onClick} className={canUnfollow ? styles.unfollow : styles.follow}>{canUnfollow ? 'Unfollow' : 'Follow'}</button>
   )
 };
 

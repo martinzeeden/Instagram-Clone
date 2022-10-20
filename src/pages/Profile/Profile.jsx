@@ -6,7 +6,7 @@ import ImageDialog from '../../components/ImageDialog/ImageDialog';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useContext } from 'react';
-import { getImagesOfUserByUserId, getUserDataByUsername } from '../../services/firebase';
+import { follow, getImagesOfUserByUserId, getUserDataByUsername, unfollow } from '../../services/firebase';
 import { useState } from 'react';
 import UserContext from '../../context/user';
 import ProfilePictures from './ProfilePictures/ProfilePictures';
@@ -22,38 +22,44 @@ const Profile = () => {
   const disableFollowing = username === currentUser.displayName;
   const canUnfollow = (currentUser && userData) ? userData?.followers.includes(currentUserData?.userId) : false;
 
-  console.log('disableFollowing', disableFollowing);
-  console.log('canUnfollow', canUnfollow)
-
-  console.log(currentUserData)
-
   const [pictures, setPictures] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
 
 
-
   useEffect(() => {
     document.title = `${username} - Instagram`
-
-    const loadProfileData = async () => {
-      const userData = await getUserDataByUsername(username);
-      setUserData(userData)
-      setFollowers(userData.followers);
-      setFollowing(userData.following);
-
-      const images = await getImagesOfUserByUserId(userData.userId);
-      setPictures(images);
-    }
-
-    const loadCurrentUserData = async () => {
-      const userData = await getUserDataByUsername(currentUser.displayName);
-      setCurrentUserData(userData);
-    }
 
     loadProfileData();
     loadCurrentUserData();
   }, []);
+
+  const loadProfileData = async () => {
+    const userData = await getUserDataByUsername(username);
+    setUserData(userData)
+    setFollowers(userData.followers);
+    setFollowing(userData.following);
+
+    const images = await getImagesOfUserByUserId(userData.userId);
+    setPictures(images);
+  }
+
+  const loadCurrentUserData = async () => {
+    const userData = await getUserDataByUsername(currentUser.displayName);
+    setCurrentUserData(userData);
+  }
+
+  const followOrUnfollowProfile =  async () => {
+    console.log("follow")
+    if(canUnfollow){
+      await unfollow(userData.userId, currentUserData.userId)
+    } else {
+      await follow(userData.userId, currentUserData.userId)
+    }
+
+    await loadCurrentUserData();
+    await loadProfileData();
+  }
   
   return ( 
     <ContentContainer>
@@ -64,7 +70,8 @@ const Profile = () => {
         canUnfollow={canUnfollow}
         picturesNumber={pictures.length}
         followersNumber={followers.length}
-        followingNumber={following.length} />
+        followingNumber={following.length}
+        followOrUnfollowProfile={followOrUnfollowProfile} />
       <div className={styles.line}/>
       <ProfilePictures pictures={pictures} username={username}/>
     </ContentContainer>
