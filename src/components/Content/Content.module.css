@@ -17,6 +17,7 @@
   display: flex;
   padding: 12px 16px;
   align-items: center;
+  cursor: pointer;
 }
 
 .accountContainer > img {
@@ -39,7 +40,6 @@
 .likesContainer {
   display: flex;
   margin-left: 12px;
-  margin-top: 8px;
 }
 
 .likes {
@@ -58,32 +58,34 @@
 
 .commentContainer {
   margin-left: 12px;
-  margin-top: 8px;
+  margin-top: 16px;
 }
 
 .actionContainer {
   margin-top: 8px;
   margin-left: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .actionContainer > img {
   height: 28px;
 }
 
-.actionContainer > img + img {
-  margin-left: 12px;
+.viewAllComments {
+  cursor: pointer;
 }
 
 .viewAllComments,
 .uploadTime {
   font-size: 13px;
   color: var(--clr-text-grey);
-  margin-top: 8px;
+  margin-top: 16px;
   margin-left: 12px;
 }
 
 .uploadTime {
-  margin-top: 16px;
+  margin-top: 32px;
 }
 
 .addCommentContainer {
