@@ -10,7 +10,7 @@ import { getPhotoByDocId, likePhoto, unlikePhoto, comment } from '../../services
 import UserContext from '../../context/user';
 import { useRef } from 'react';
 
-const ImageDialog = ({ onClose, image, username }) => {
+const ImageDialog = ({ onClose, image, username, reload }) => {
   const { currentUser } = useContext(UserContext);
   const [currentImage, setCurrentImage] = useState(image);
   const userLikedPhoto = currentImage.likes.includes(currentUser.displayName);
@@ -28,7 +28,9 @@ const ImageDialog = ({ onClose, image, username }) => {
 
   const updatePhotoData = async () => {
     const updatedImage = await getPhotoByDocId(image.docId)
-    setCurrentImage(updatedImage)
+    setCurrentImage(updatedImage);
+
+    reload()
   }
 
   const post = async () => {

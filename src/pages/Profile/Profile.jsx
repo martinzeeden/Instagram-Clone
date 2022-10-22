@@ -73,7 +73,7 @@ const Profile = () => {
         followingNumber={following.length}
         followOrUnfollowProfile={followOrUnfollowProfile} />
       <div className={styles.line}/>
-      <ProfilePictures pictures={pictures} username={username}/>
+      <ProfilePictures reload={loadProfileData} pictures={pictures} username={username}/>
     </ContentContainer>
   );
 }

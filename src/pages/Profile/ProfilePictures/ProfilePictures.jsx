@@ -3,7 +3,7 @@ import ImageDialog from '../../../components/ImageDialog/ImageDialog';
 import ProfileImage from '../../../components/ProfileImage/ProfileImage';
 import styles from './ProfilePictures.module.css';
 
-const ProfilePictures = ({ pictures, username }) => {
+const ProfilePictures = ({ pictures, username, reload }) => {
   const [openImage, setOpenImage] = useState(null);
 
   return (
@@ -17,7 +17,7 @@ const ProfilePictures = ({ pictures, username }) => {
             comments={image.comments.length}/>
         ))}
       </div>
-      {openImage && <ImageDialog username={username} image={openImage} onClose={() => setOpenImage(null)}/>}
+      {openImage && <ImageDialog reload={reload} username={username} image={openImage} onClose={() => setOpenImage(null)}/>}
     </>
   )
 }
