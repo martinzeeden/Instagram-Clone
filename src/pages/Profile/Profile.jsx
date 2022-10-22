@@ -41,6 +41,7 @@ const Profile = () => {
     setFollowing(userData.following);
 
     const images = await getImagesOfUserByUserId(userData.userId);
+    images.sort((a,b) => b.dateCreated - a.dateCreated)
     setPictures(images);
   }
 
