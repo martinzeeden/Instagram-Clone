@@ -1,0 +1,19 @@
+.sidebar {
+  margin-left: 32px;
+  width: 196px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarHeadline {
+  color: var(--clr-text-grey);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.line {
+  background: var(--clr-text-grey);
+  height: 1px;
+  margin-bottom: 16px;
+}

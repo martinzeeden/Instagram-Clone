@@ -169,3 +169,17 @@ export async function getPhotos(userId, following) {
   return userFollowedPhotos
 }
 
+export async function getSuggestedProfiles(userId, following){
+  const result  = await firebase
+    .firestore()
+    .collection('users')
+    .where('userId', 'not-in', [...following, userId])
+    .limit(10)
+    .get();
+
+    return result.docs.map((doc) => ({
+      ...doc.data(),
+      docId: doc.id
+    }))
+}
+

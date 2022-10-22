@@ -1,0 +1,34 @@
+.suggestedProfile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.imageAndUsernameContainer {
+  display: flex;
+  align-items: center;
+}
+
+.suggestedProfile + .suggestedProfile {
+  margin-top: 16px;
+}
+
+.suggestedProfileImage {
+  height: 24px;
+  width: 24px;
+  border-radius: 12px;
+}
+
+.suggestedProfileUsername {
+  color: var(--clr-text-white);
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.followButton {
+  background-color: transparent;
+  color: var(--clr-primary);
+  border: none;
+  margin-left: 16px;
+  cursor: pointer;
+}
