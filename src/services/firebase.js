@@ -183,3 +183,15 @@ export async function getSuggestedProfiles(userId, following){
     }))
 }
 
+export async function getAllUsernames(currentUserId){
+  const result = await firebase
+    .firestore()
+    .collection('users')
+    .where('userId', '!=', currentUserId)
+    .get();
+
+  return result.docs
+    .map((doc) => ({...doc.data()}))
+    .map(({ username }) => username)
+}
+

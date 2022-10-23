@@ -10,10 +10,11 @@ import UserContext from '../../context/user';
 import { useNavigate } from 'react-router-dom';
 import { DASHBOARD } from '../../constants/Routes';
 import Avatar from '../Avatar/Avatar';
+import UserSearch from '../UserSearch/UserSearch';
 
 const DashboardHeader = () => {
   const { firebase } = useContext(FirebaseContext);
-  const { user } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   return (
@@ -21,10 +22,11 @@ const DashboardHeader = () => {
       <div className={styles.header}>
         <h1>Instagram</h1>
         <div className={styles.buttonBox}>
+          <UserSearch/>
           <IconButton icon={IconAdd}/>
           <IconButton icon={IconHome} onClick={() => navigate(DASHBOARD)}/>
           <IconButton icon={IconLogout} onClick={() => firebase.auth().signOut()}/>
-          <Avatar user={user}/>
+          <Avatar user={currentUser}/>
         </div>
       </div>
     </header>
