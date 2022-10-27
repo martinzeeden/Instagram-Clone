@@ -16,9 +16,8 @@
 }
 
 .dialog {
-  
   width: 90%;
-  max-width: 1200px;
+
   background-color: var(--clr-card-background);
   border-radius: 8px;
   /* background-color: hsla(0, 100%, 100%, 0.16);	 */
@@ -27,4 +26,12 @@
 		0px 24px 38px 3px hsla(0,0%,0%,0.14), 
 		0px 9px 46px 8px hsla(0,0%,0%,0.12), 
 		0px 11px 15px -7px hsla(0,0%,0%,0.2);
+}
+
+.maxWidth {
+  max-width: 1200px;
+}
+
+.normalWidth {
+  max-width: 500px;
 }

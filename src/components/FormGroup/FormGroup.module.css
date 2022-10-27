@@ -5,4 +5,5 @@
 
 .formGroup > label {
     margin-bottom: 8px;
+    color: var(--clr-text-white)
 }

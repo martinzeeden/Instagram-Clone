@@ -7,7 +7,7 @@ const Avatar = ({ user }) => {
 
   return (
     <button className={styles.avatar} onClick={() => navigate(`profile/${user.displayName}`)}>
-      <img src={`/images/avatars/${"martin"}.jpg`}alt=""/>
+      <img src={`/images/avatars/${"martin"}.jpg`} alt=""/>
     </button>
   );
 }

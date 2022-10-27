@@ -4,6 +4,7 @@
   border: none;
   border-radius: 16px;
   background: transparent;
+  cursor: pointer;
 }
 
 .avatar > img {

@@ -174,7 +174,7 @@ export async function getSuggestedProfiles(userId, following){
     .firestore()
     .collection('users')
     .where('userId', 'not-in', [...following, userId])
-    .limit(10)
+    .limit(3)
     .get();
 
     return result.docs.map((doc) => ({

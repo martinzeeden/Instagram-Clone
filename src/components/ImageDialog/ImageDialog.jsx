@@ -40,7 +40,7 @@ const ImageDialog = ({ onClose, image, username, reload }) => {
   }
 
   return (
-    <Dialog onClose={onClose}>
+    <Dialog onClose={onClose} maxWidth>
       <div className={styles.imageDialog}>
         <img src={currentImage.imageSrc} alt="" />
         <div className={styles.imageDialogContent}>

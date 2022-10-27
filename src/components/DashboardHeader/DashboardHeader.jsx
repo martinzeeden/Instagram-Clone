@@ -11,10 +11,13 @@ import { useNavigate } from 'react-router-dom';
 import { DASHBOARD } from '../../constants/Routes';
 import Avatar from '../Avatar/Avatar';
 import UserSearch from '../UserSearch/UserSearch';
+import { useState } from 'react';
+import UploadImageDialog from '../UploadImageDialog/UploadImageDialog';
 
 const DashboardHeader = () => {
   const { firebase } = useContext(FirebaseContext);
   const { currentUser } = useContext(UserContext);
+  const [openUploadImageDialog, setOpenUploadImageDialog] = useState(false)
   const navigate = useNavigate();
 
   return (
@@ -23,12 +26,13 @@ const DashboardHeader = () => {
         <h1>Instagram</h1>
         <div className={styles.buttonBox}>
           <UserSearch/>
-          <IconButton icon={IconAdd}/>
+          <IconButton icon={IconAdd} onClick={() => setOpenUploadImageDialog(true)}/>
           <IconButton icon={IconHome} onClick={() => navigate(DASHBOARD)}/>
           <IconButton icon={IconLogout} onClick={() => firebase.auth().signOut()}/>
           <Avatar user={currentUser}/>
         </div>
       </div>
+      {openUploadImageDialog && <UploadImageDialog onClose={() => setOpenUploadImageDialog(false)}/>}
     </header>
   );
 };

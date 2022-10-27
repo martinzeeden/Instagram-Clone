@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styles from './Dialog.module.css';
 
-const Dialog = ({ children, onClose }) => {
+const Dialog = ({ children, onClose, maxWidth = false }) => {
   const dialogRef = useRef(null)
 
   const handleClick = (e) => {
@@ -13,7 +13,7 @@ const Dialog = ({ children, onClose }) => {
 
   return (
     <div className={styles.overlay} onClick={handleClick}>
-      <div className={styles.dialog} ref={dialogRef}>
+      <div className={`${styles.dialog} ${maxWidth ? styles.maxWidth : styles.normalWidth}`} ref={dialogRef}>
         {children}
       </div>
     </div>

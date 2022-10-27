@@ -4,8 +4,7 @@ import Image from './1.JPG'
 import Comment from '../Comment/Comment';
 import HeartIcon from '../../assets/icons/heart.svg';
 import HeartRedIcon from '../../assets/icons/heart-red.svg';
-import ChatIcon from '../../assets/icons/chat.svg';
-import { comment, getPhotoByDocId, getUserDataByUserId, likePhoto, unlikePhoto } from '../../services/firebase';
+import { comment, getUserDataByUserId, likePhoto, unlikePhoto } from '../../services/firebase';
 import { useContext } from 'react';
 import UserContext from '../../context/user';
 import { formatDate } from '../../helpers/format';
@@ -23,7 +22,6 @@ const Content = ({ photo, reload }) => {
   useEffect(() => {
     const loadUserData = async () => {
       const data = await getUserDataByUserId(photo.userId);
-      console.log(data)
       setPhotoUserData(data)
     }
 
@@ -32,7 +30,7 @@ const Content = ({ photo, reload }) => {
 
   const post = async () => {
     await comment(photo.docId, commentRef.current.value, currentUser.displayName);
-    await updatePhotoData();
+    await reload();
     commentRef.current.value = '';
   }
 
@@ -47,11 +45,7 @@ const Content = ({ photo, reload }) => {
       await likePhoto(photo.docId, currentUser.displayName)
     }
 
-    await updatePhotoData();
-  }
-
-  const updatePhotoData = async () => {
-    reload()
+    await reload()();
   }
 
   const showProfile = () => {
@@ -59,31 +53,32 @@ const Content = ({ photo, reload }) => {
   }
   
   return (
-  <div className={styles.container}>
-    <div className={styles.accountContainer} onClick={showProfile}>
-      <img src={Image}/>
-      <p>{photoUserData?.username}</p>
+    <div className={styles.container}>
+      <div className={styles.accountContainer} onClick={showProfile}>
+        <img src={Image}/>
+        <p>{photoUserData?.username}</p>
+      </div>
+      <img className={styles.image} src={photo.imageSrc} alt="" />
+      <div className={styles.actionContainer}>
+        <img src={userLikedPhoto ? HeartRedIcon : HeartIcon} alt="" onClick={() => likeImage()}/>
+        <div className={styles.likesContainer}>
+          <p className={styles.likes}><b>{photo.likes.length}</b>Likes</p>
+          <p className={styles.likes}>-</p>
+          <p className={styles.likes}><b>{photo.comments.length}</b>Comments</p>
+      </div>
+      </div>
+      
+      {photo.comments.length > 3 && <p className={styles.viewAllComments} onClick={viewAllComments}>View all {photo.comments.length} comments</p>}
+      <div className={styles.commentContainer}>
+        {photo.comments.slice(0,numOfCommentsToShow).map(comment => <Comment username={comment.displayName} comment={comment.comment}/>)}
+      </div>
+      <p className={styles.uploadTime}>Uploaded on {formatDate(photo.dateCreated)}</p>
+      <div className={styles.addCommentContainer}>
+        <input placeholder='Add a comment' ref={commentRef}/>
+        <button onClick={post}>Post</button>
+      </div>
     </div>
-    <img className={styles.image} src={photo.imageSrc} alt="" />
-    <div className={styles.actionContainer}>
-      <img src={userLikedPhoto ? HeartRedIcon : HeartIcon} alt="" onClick={() => likeImage()}/>
-      <div className={styles.likesContainer}>
-        <p className={styles.likes}><b>{photo.likes.length}</b>Likes</p>
-        <p className={styles.likes}>-</p>
-        <p className={styles.likes}><b>{photo.comments.length}</b>Comments</p>
-    </div>
-    </div>
-    
-    {photo.comments.length > 3 && <p className={styles.viewAllComments} onClick={viewAllComments}>View all {photo.comments.length} comments</p>}
-    <div className={styles.commentContainer}>
-      {photo.comments.slice(0,numOfCommentsToShow).map(comment => <Comment username={comment.displayName} comment={comment.comment}/>)}
-    </div>
-    <p className={styles.uploadTime}>Uploaded on {formatDate(photo.dateCreated)}</p>
-    <div className={styles.addCommentContainer}>
-      <input placeholder='Add a comment' ref={commentRef}/>
-      <button onClick={post}>Post</button>
-    </div>
-  </div>)
+  )
 }
 
 export default Content;
