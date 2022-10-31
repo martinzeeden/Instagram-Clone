@@ -1,4 +1,5 @@
 import Firebase from 'firebase/compat/app';
+import { getStorage } from 'firebase/storage'
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 
@@ -12,6 +13,7 @@ const config = {
 };
 
 const firebase = Firebase.initializeApp(config);
+const storage = getStorage(firebase)
 const { FieldValue } = Firebase.firestore;
 
-export { firebase, FieldValue };
+export { firebase, storage, FieldValue };

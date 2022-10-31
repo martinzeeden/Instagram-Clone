@@ -195,3 +195,7 @@ export async function getAllUsernames(currentUserId){
     .map(({ username }) => username)
 }
 
+export async function post(photoObj) {
+  await firebase.firestore().collection('photos').add(photoObj);
+}
+
