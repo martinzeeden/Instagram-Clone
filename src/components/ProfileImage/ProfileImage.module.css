@@ -6,6 +6,7 @@
 .imageOverlayContainer {
   position: relative;
   cursor: pointer;
+  z-index: 2;
 }
 
 .imageOverlayContainer:hover > .imageOverlay {

@@ -14,13 +14,13 @@ const UserSearch = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const loadAllUsernames = async () => {
+      const usernames = await getAllUsernames(currentUser.uid)
+      setAllUsernames(usernames)
+    }
+
     loadAllUsernames()
   }, [])
-
-  const loadAllUsernames = async () => {
-    const usernames = await getAllUsernames(currentUser.uid)
-    setAllUsernames(usernames)
-  }
 
   useEffect(() => {
     const filtered = allUsernames.filter((username) => username.startsWith(searchUsername));
