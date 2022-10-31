@@ -13,7 +13,9 @@ const Sidebar = ({ currentUserData }) => {
       setSuggestedProfiles(suggestedProfiles)
     }
 
-    loadData()
+    if(currentUserData){
+      loadData()
+    }
   }, [])
 
   return (
