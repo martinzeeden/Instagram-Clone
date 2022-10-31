@@ -41,9 +41,7 @@ const Dashboard = () => {
   // if(loading) return <div/>
 
   return (
-    <ContentContainer 
-      sidebar={<Sidebar currentUserData={currentUserData}/>}
-    >
+    <ContentContainer>
       {photos.map((photo) => (
         <Content key={photo.photoId} photo={photo} reload={loadFollowedUserPhotos}/>
       ))}
