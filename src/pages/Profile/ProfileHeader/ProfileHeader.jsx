@@ -18,7 +18,6 @@ const ProfileHeader = ({
           <p><b>{followersNumber}</b> Follower</p>
           <p><b>{followingNumber}</b> Following</p>
         </div>
-        <p className={styles.description}>{description}</p>
       </div>
     </div>
   )
