@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentContainer from '../../components/ContentContainer/ContentContainer';
 import styles from './Profile.module.css';
-import ProfileImg from './1.JPG'
+import ProfileImg from '../../assets/icons/account.svg'
 import ImageDialog from '../../components/ImageDialog/ImageDialog';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';

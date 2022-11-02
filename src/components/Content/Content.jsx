@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styles from './Content.module.css';
-import Image from './1.JPG'
+import Image from '../../assets/icons/account.svg'
 import Comment from '../Comment/Comment';
 import HeartIcon from '../../assets/icons/heart.svg';
 import HeartRedIcon from '../../assets/icons/heart-red.svg';
